@@ -43,6 +43,7 @@ jobs:
         SERVER_HOST: ${{ secrets.SERVER_HOST }}
         SERVER_USER: ${{ secrets.SERVER_USER }}
         SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+        SERVER_FILE_PATH: ${{secrets.SERVER_FILE_PATH}}
       run: |
         # 创建 SSH 目录并设置权限
         mkdir -p ~/.ssh
@@ -59,7 +60,7 @@ jobs:
         SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
       run: |
         # 使用 rsync 上传文件
-         rsync -av -e "ssh -i ~/.ssh/deploy_key" build/ "$SERVER_USER@$SERVER_HOST:/www/nav.acgame.fun/"
+         rsync -av -e "ssh -i ~/.ssh/deploy_key" build/ "$SERVER_USER@$SERVER_HOST:$SERVER_FILE_PATH"
 
     - name: Clean up
       run: rm -f ~/.ssh/deploy_key

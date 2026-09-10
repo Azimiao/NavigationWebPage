@@ -7,13 +7,14 @@ const RASearchEngines = [
         "placeholder":"使用百度搜索",
         "icon": IconConfig.baidu,
         "suggester": function(keyword){
-            const url = `//suggestion.baidu.com/su?wd=${keyword}`;
+            const url = `https://www.baidu.com/sugrec?prod=pc&ie=utf-8&json=1&wd=${encodeURIComponent(keyword)}`;
             return (fetchJsonp(url, { jsonpCallback: "cb"}).then((res) => {
                 return res.json();
             }).catch(e => {
                 return Promise.reject(e);
             })).then(jsonObj=>{
-                return Promise.resolve(jsonObj && jsonObj.s ? jsonObj.s : []);
+                const items = jsonObj && Array.isArray(jsonObj.g) ? jsonObj.g : [];
+                return Promise.resolve(items.map((item) => typeof item === 'string' ? item : item && item.q).filter(Boolean));
             }).catch(e=>{
                 return Promise.reject(e);
             });

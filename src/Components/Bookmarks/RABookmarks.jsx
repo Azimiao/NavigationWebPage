@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IconButton, Box, Grid, Paper, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { IconButton, Container, Box, TextField, Grid, Paper, Typography, Avatar, Dialog, DialogTitle, DialogContent, Link as MuiLink } from '@mui/material';
 import { makeStyles } from "@mui/styles";
 import FolderIcon from '@mui/icons-material/Folder';
 import CloseIcon from '@mui/icons-material/Close';
@@ -72,9 +72,7 @@ const useStyles = makeStyles((theme) => ({
         transform: 'translate(-50%, -50%)',
         left: "50%",
         top: " 50%",
-        width:"95%",
-        maxWidth:"800px",
-        height:"calc(80% + 38px)",
+        width:"50%",
         zIndex:"3",
     },
 
@@ -95,7 +93,6 @@ const useStyles = makeStyles((theme) => ({
         boxSizing: "border-box",
         maxWidth: '100%',
         width: '100%',
-        height: 'calc(100% - 37px)',
         //  margin: '0 auto',
         padding: '0 !important',
         overflowY:"hidden !important",
